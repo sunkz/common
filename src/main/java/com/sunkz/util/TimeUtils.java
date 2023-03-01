@@ -8,4 +8,5 @@ public class TimeUtils {
     public static String now() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\t";
     }
+
 }
