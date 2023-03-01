@@ -31,14 +31,6 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>sunkz</name>
-            <url>https://maven.pkg.github.com/sunkz/common</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
