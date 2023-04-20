@@ -9,4 +9,8 @@ public class TimeUtils {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\t";
     }
 
+    public static String now(String pattern) {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern)) + "\t";
+    }
+
 }
