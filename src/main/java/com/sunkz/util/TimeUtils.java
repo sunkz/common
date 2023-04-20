@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeUtils {
 
+    public static final String PATTERN_1 = "HH:mm:ss";
+    public static final String PATTERN_2 = "mm:ss";
+
     public static String now() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\t";
     }
