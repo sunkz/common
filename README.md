@@ -1,4 +1,4 @@
-github package
+github maven
 
-https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+https://sunkz.top/2018/07/12/GithubMaven/
 
