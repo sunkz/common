@@ -1,4 +1,4 @@
-package com.sunkz.util;
+package com.sunkz.common.util;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

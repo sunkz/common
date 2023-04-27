@@ -1,4 +1,4 @@
-package com.sunkz.util;
+package com.sunkz.common.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
