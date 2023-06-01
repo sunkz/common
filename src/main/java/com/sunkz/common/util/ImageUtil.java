@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,5 +41,20 @@ public class ImageUtil {
         }
         return compare(image1, image2) > COMMON_THRESHOLD;
     }
+
+    public static BufferedImage compress(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        int newWidth = image.getWidth() / 2;
+        int newHeight = (int) Math.round(height * (double) newWidth / width);
+
+        BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = newImage.createGraphics();
+        g.drawImage(image, 0, 0, newWidth, newHeight, null);
+        g.dispose();
+
+        return newImage;
+    }
+
 
 }
