@@ -42,10 +42,10 @@ public class ImageUtil {
         return compare(image1, image2) > COMMON_THRESHOLD;
     }
 
-    public static BufferedImage compress(BufferedImage image) {
+    public static BufferedImage compress(BufferedImage image, double scale) {
         int width = image.getWidth();
-        int height = image.getHeight();
-        int newWidth = (image.getWidth() * 2) / 3;
+        int height = (int) (image.getHeight() * scale);
+        int newWidth = image.getWidth();
         int newHeight = (int) Math.round(height * (double) newWidth / width);
 
         BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
