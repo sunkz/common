@@ -1,7 +1,10 @@
 package com.sunkz.common.util;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 @Slf4j
@@ -12,6 +15,11 @@ public class FileUtil {
             boolean delete = file.delete();
             log.info("FileUtil delete {},{}", file.getName(), delete);
         }
+    }
+
+    @SneakyThrows
+    public static BufferedImage captureScreen() {
+        return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
     }
 
 }

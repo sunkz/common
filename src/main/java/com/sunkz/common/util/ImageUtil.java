@@ -17,10 +17,7 @@ public class ImageUtil {
      * 仅限相同大小图片比较
      */
     @SneakyThrows
-    private static double compare(File file1, File file2) {
-        BufferedImage image1 = ImageIO.read(file1);
-        BufferedImage image2 = ImageIO.read(file2);
-
+    private static double compare(BufferedImage image1, BufferedImage image2) {
         int[] pixels1 = image1.getRGB(0, 0, image1.getWidth(), image1.getHeight(), null, 0, image1.getWidth());
         int[] pixels2 = image2.getRGB(0, 0, image2.getWidth(), image2.getHeight(), null, 0, image2.getWidth());
 
@@ -37,13 +34,11 @@ public class ImageUtil {
         return dotProduct / (Math.sqrt(magnitude1) * Math.sqrt(magnitude2));
     }
 
-    public static boolean isSame(File file1, File file2) {
-        if (file1 == null || file2 == null) {
+    public static boolean isSame(BufferedImage image1, BufferedImage image2) {
+        if (image1 == null || image2 == null) {
             return false;
         }
-        double d = compare(file1, file2);
-        log.info("ImageUtil isSame {},{},{}", file1.getName(), file2.getName(), d);
-        return d > COMMON_THRESHOLD;
+        return compare(image1, image2) > COMMON_THRESHOLD;
     }
 
 }
