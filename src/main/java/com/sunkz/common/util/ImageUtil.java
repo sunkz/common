@@ -45,7 +45,7 @@ public class ImageUtil {
     public static BufferedImage compress(BufferedImage image) {
         int width = image.getWidth();
         int height = image.getHeight();
-        int newWidth = image.getWidth() / 2;
+        int newWidth = (image.getWidth() * 2) / 3;
         int newHeight = (int) Math.round(height * (double) newWidth / width);
 
         BufferedImage newImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
