@@ -12,8 +12,8 @@ public class FileUtil {
 
     public static void delete(File file) {
         if (file != null && file.exists() && !file.isDirectory()) {
-            boolean delete = file.delete();
-            log.info("FileUtil delete {},{}", file.getName(), delete);
+            file.delete();
+            log.info("FileUtil delete {}", file.getName());
         }
     }
 
