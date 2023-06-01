@@ -1,12 +1,14 @@
 package com.sunkz.common.util;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public class ImageUtil {
 
     private static final double COMMON_THRESHOLD = 0.9999;
@@ -36,7 +38,11 @@ public class ImageUtil {
     }
 
     public static boolean isSame(File file1, File file2) {
+        if (file1 == null || file2 == null) {
+            return false;
+        }
         double d = compare(file1, file2);
+        log.info("ImageUtil isSame {},{},{}", file1.getName(), file2.getName(), d);
         return d > COMMON_THRESHOLD;
     }
 
