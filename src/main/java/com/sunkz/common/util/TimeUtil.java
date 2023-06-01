@@ -10,11 +10,11 @@ public class TimeUtil {
     public static final String PATTERN_3 = "yyyyMMddHHmmss";
 
     public static String now() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "\t";
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
 
     public static String now(String pattern) {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern)) + "\t";
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern));
     }
 
 }
