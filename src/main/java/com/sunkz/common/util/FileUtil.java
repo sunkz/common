@@ -27,7 +27,6 @@ public class FileUtil {
         }
     }
 
-
     @SneakyThrows
     public static BufferedImage captureScreen() {
         return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
