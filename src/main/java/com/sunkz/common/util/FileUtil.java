@@ -20,6 +20,14 @@ public class FileUtil {
         }
     }
 
+    public static void delete(String name) {
+        File file = new File(name);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+
     @SneakyThrows
     public static BufferedImage captureScreen() {
         return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
