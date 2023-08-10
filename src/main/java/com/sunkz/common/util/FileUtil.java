@@ -36,7 +36,7 @@ public class FileUtil {
     public static void downloadUrl(String url, String name) {
         InputStream inputStream = new URL(url).openStream();
         FileOutputStream fileOutputStream = new FileOutputStream(name);
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[1024 * 1024];
         int length;
         while ((length = inputStream.read(buffer)) != -1) {
             fileOutputStream.write(buffer, 0, length);
