@@ -10,6 +10,7 @@ public class TimeUtil {
     public static final String PATTERN_3 = "yyyyMMddHHmmss";
     public static final String PATTERN_4 = "yyyy-MM-dd";
     public static final String PATTERN_5 = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_6 = "yyyyMMdd";
 
     public static String now() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
