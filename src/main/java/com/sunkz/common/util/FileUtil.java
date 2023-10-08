@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -43,6 +45,16 @@ public class FileUtil {
         }
         inputStream.close();
         fileOutputStream.close();
+    }
+
+    public static void write(String content, String fileName) {
+        try {
+            FileWriter writer = new FileWriter(fileName);
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            log.error("write error", e);
+        }
     }
 
 }
