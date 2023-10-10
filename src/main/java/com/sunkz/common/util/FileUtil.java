@@ -1,5 +1,6 @@
 package com.sunkz.common.util;
 
+import cn.hutool.core.util.RandomUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
