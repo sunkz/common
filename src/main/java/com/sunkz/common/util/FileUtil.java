@@ -1,6 +1,5 @@
 package com.sunkz.common.util;
 
-import cn.hutool.core.util.RandomUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,14 +47,16 @@ public class FileUtil {
         fileOutputStream.close();
     }
 
-    public static void write(String content, String fileName) {
+    public static String write(String content) {
+        String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() / 1000 + ".txt";
         try {
-            FileWriter writer = new FileWriter(fileName);
+            FileWriter writer = new FileWriter(file);
             writer.write(content);
             writer.close();
         } catch (IOException e) {
             log.error("write error", e);
         }
+        return file;
     }
 
 }
