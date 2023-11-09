@@ -21,5 +21,9 @@ public class ExcelUtil {
         return null;
     }
 
+    public static <T> void write(List<T> dataList) {
+
+    }
+
 }
 
