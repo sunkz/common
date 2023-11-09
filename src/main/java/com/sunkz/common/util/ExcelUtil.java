@@ -21,8 +21,10 @@ public class ExcelUtil {
         return null;
     }
 
-    public static <T> void write(List<T> dataList, String fileName) {
-        cn.hutool.poi.excel.ExcelUtil.getWriter("./" + fileName + ".xlsx").write(dataList).close();
+    public static <T> String write(List<T> dataList) {
+        String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() / 1000 + ".xlsx";
+        cn.hutool.poi.excel.ExcelUtil.getWriter(file).write(dataList).close();
+        return file;
     }
 
 }
