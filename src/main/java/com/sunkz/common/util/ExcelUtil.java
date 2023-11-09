@@ -21,8 +21,8 @@ public class ExcelUtil {
         return null;
     }
 
-    public static <T> void write(List<T> dataList) {
-
+    public static <T> void write(List<T> dataList, String fileName) {
+        cn.hutool.poi.excel.ExcelUtil.getWriter("./" + fileName + ".xlsx").write(dataList).close();
     }
 
 }
