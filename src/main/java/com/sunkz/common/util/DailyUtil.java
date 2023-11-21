@@ -2,6 +2,7 @@ package com.sunkz.common.util;
 
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -175,11 +176,12 @@ public class DailyUtil {
                 user.append(1 + insertItemCount).append(".应聘候选人面试\n");
                 user.append(2 + insertItemCount).append(".邀约筛选候选人\n");
             }
-
             if (isOnlyRestTomorrowAfternoon) {
                 user.append(n + insertItemCount).append(".下午休息\n");
             }
-
+            if (StringUtils.endsWithIgnoreCase(user.toString(), "明日计划：\n")) {
+                user.append("1.休息\n");
+            }
             users.add(user.toString());
         }
         return users;
