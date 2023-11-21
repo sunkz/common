@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,21 +14,25 @@ import java.util.stream.Collectors;
 
 public class DailyUtil {
 
-    private static final List<String> NUMS = Arrays.asList("一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十");
+    private static final List<String> NUMS = Arrays.asList("一", "二", "三", "四", "五", "六", "七", "八", "九", "十",
+            "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
+            "二十一", "二十二", "二十三", "二十四", "二十五", "二十六", "二十七", "二十八", "二十九", "三十",
+            "三十一", "三十二", "三十三", "三十四", "三十五", "三十六", "三十七", "三十八", "三十九", "四十",
+            "四十一", "四十二", "四十三", "四十四", "四十五", "四十六", "四十七", "四十八", "四十九", "五十");
     private static boolean IS_TODAY_REST_DAY = false;
-    public static LocalDateTime BOOT_TIME = LocalDateTime.now();
 
     public static String parseDaily(MultipartFile file) throws IOException {
         ExcelReader reader;
         try {
-            reader = cn.hutool.poi.excel.ExcelUtil.getReader(file.getInputStream(), "日报");
+            reader = ExcelUtil.getReader(file.getInputStream(), "日报");
         } catch (Exception e) {
             reader = ExcelUtil.getReader(file.getInputStream());
         }
-        String title = getTitle(reader.read(0, 0).get(0));
+        String title = "成品人事行政+财务" + LocalDate.now().getMonthValue() + "." + LocalDate.now().getDayOfMonth() + "日报";
         List<List<String>> rows = removeRepeat(reader.read(1));
         IS_TODAY_REST_DAY = isRestDay(rows.get(1));
-        List<String> users = getUsers(transpose(rows));
+        List<List<String>> transposeRows = transpose(rows);
+        List<String> users = getUsers(transposeRows);
         return title + "\n" + String.join("\n", users);
     }
 
@@ -40,7 +43,7 @@ public class DailyUtil {
                 i++;
             }
         }
-        return i >= 5;
+        return i >= rows.size() / 2;
     }
 
     private static List<List<String>> removeRepeat(List<List<Object>> rows) {
@@ -180,49 +183,6 @@ public class DailyUtil {
             users.add(user.toString());
         }
         return users;
-    }
-
-    private static String getTitle(List<Object> row) {
-        String date = null;
-        try {
-            for (Object o : row) {
-                String s = String.valueOf(o);
-                if (s.isEmpty()) {
-                    continue;
-                }
-                if (s.contains("(")) {
-                    s = s.substring(0, s.indexOf('('));
-                } else if (s.contains("（")) {
-                    s = s.substring(0, s.indexOf('（'));
-                }
-                String[] split;
-                if (s.contains("/")) {
-                    split = s.split("/");
-                } else if (s.contains("-")) {
-                    split = s.split("-");
-                } else if (s.contains("．")) {
-                    split = s.split("．");
-                } else if (s.contains(".")) {
-                    split = s.split("\\.");
-                } else {
-                    split = new String[]{String.valueOf(LocalDate.now().getMonthValue()), String.valueOf(LocalDate.now().getDayOfMonth())};
-                }
-                List<String> monthDay = new ArrayList<>();
-                if (split.length > 1) {
-                    for (String s1 : split) {
-                        if (Integer.parseInt(s1) > 31) {
-                            continue;
-                        }
-                        monthDay.add(s1);
-                    }
-                }
-                date = monthDay.get(0) + "." + monthDay.get(1);
-            }
-
-        } catch (Exception e) {
-            date = LocalDate.now().getMonthValue() + "." + LocalDate.now().getDayOfMonth();
-        }
-        return "成品综合＋财务" + date + "日报";
     }
 
     private static List<List<String>> transpose(List<List<String>> list) {
