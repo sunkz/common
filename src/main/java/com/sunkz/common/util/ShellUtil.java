@@ -4,6 +4,8 @@ import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShellUtil {
 
@@ -27,6 +29,18 @@ public class ShellUtil {
             command = "kill -9 " + pid;
             Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", command});
         }
+    }
+
+    @SneakyThrows
+    public static List<String> runCommand(String exec) {
+        Process process = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", exec});
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        List<String> result = new ArrayList<>();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            result.add(line);
+        }
+        return result;
     }
 
 }
