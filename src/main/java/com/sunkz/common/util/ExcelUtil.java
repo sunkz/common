@@ -1,6 +1,8 @@
 package com.sunkz.common.util;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
@@ -10,13 +12,15 @@ import java.util.UUID;
 
 public class ExcelUtil {
 
+    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
+
     public static <T> List<T> parseFromURL(String url, Map<String, String> headerAlias, Class<T> clazz) {
         try {
             File file = new File(UUID.randomUUID() + ".xlsx");
             FileUtils.copyURLToFile(new URL(url), file);
             return cn.hutool.poi.excel.ExcelUtil.getReader(file).setHeaderAlias(headerAlias).readAll(clazz);
         } catch (Exception e) {
-            System.out.println("解析失败");
+            log.error("parseFromURL error url={},headerAlias={}", url, headerAlias, e);
         }
         return null;
     }

@@ -9,5 +9,4 @@ public class RamUtil {
         System.out.println("size:\t" + size);
     }
 
-
 }

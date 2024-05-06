@@ -1,9 +1,12 @@
 package com.sunkz.common.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
+@Slf4j
 public class NetUtil {
 
     public static String getIP() {
@@ -26,7 +29,7 @@ public class NetUtil {
             }
             return candidateAddress == null ? InetAddress.getLocalHost().getHostAddress() : candidateAddress.getHostAddress();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("getIP error", e);
         }
         return null;
     }
