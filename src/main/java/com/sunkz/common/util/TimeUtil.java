@@ -20,4 +20,12 @@ public class TimeUtil {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern));
     }
 
+    public static void sleep(Long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
