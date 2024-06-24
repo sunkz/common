@@ -48,7 +48,7 @@ public class FileUtil {
     }
 
     public static String write(String content) {
-        String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() / 1000 + ".txt";
+        String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() + ".txt";
         try {
             FileWriter writer = new FileWriter(file);
             writer.write(content);
