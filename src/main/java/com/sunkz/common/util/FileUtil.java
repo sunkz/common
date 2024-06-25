@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -34,29 +35,29 @@ public class FileUtil {
         return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
     }
 
-    @SneakyThrows
     public static void downloadUrl(String url, String name) {
-        InputStream inputStream = new URL(url).openStream();
-        FileOutputStream fileOutputStream = new FileOutputStream(name);
-        byte[] buffer = new byte[1024 * 1024 * 1024];
-        int length;
-        while ((length = inputStream.read(buffer)) != -1) {
-            fileOutputStream.write(buffer, 0, length);
+        try (InputStream inputStream = new URL(url).openStream();
+             FileOutputStream fileOutputStream = new FileOutputStream(name)) {
+
+            byte[] buffer = new byte[8192];
+            int length;
+            while ((length = inputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        inputStream.close();
-        fileOutputStream.close();
     }
 
     public static String write(String content) {
         String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() + ".txt";
-        try {
-            FileWriter writer = new FileWriter(file);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(content);
-            writer.close();
+            return file;
         } catch (IOException e) {
-            log.error("write error", e);
+            e.printStackTrace();
+            return null;
         }
-        return file;
     }
 
 }
