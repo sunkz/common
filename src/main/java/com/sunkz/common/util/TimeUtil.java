@@ -1,5 +1,7 @@
 package com.sunkz.common.util;
 
+import lombok.SneakyThrows;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,12 +22,9 @@ public class TimeUtil {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern));
     }
 
+    @SneakyThrows
     public static void sleep(Long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(milliseconds);
     }
 
 }

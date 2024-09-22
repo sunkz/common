@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,6 +26,7 @@ public class FileUtil {
         }
     }
 
+    @SneakyThrows
     public static void delete(String name) {
         File file = new File(name);
         if (file.exists()) {
@@ -39,40 +39,32 @@ public class FileUtil {
         return new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
     }
 
+    @SneakyThrows
     public static void downloadUrl(String url, String name) {
-        try (InputStream inputStream = new URL(url).openStream();
-             FileOutputStream fileOutputStream = new FileOutputStream(name)) {
-
-            byte[] buffer = new byte[8192];
-            int length;
-            while ((length = inputStream.read(buffer)) != -1) {
-                fileOutputStream.write(buffer, 0, length);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        InputStream inputStream = new URL(url).openStream();
+        FileOutputStream fileOutputStream = new FileOutputStream(name);
+        byte[] buffer = new byte[8192];
+        int length;
+        while ((length = inputStream.read(buffer)) != -1) {
+            fileOutputStream.write(buffer, 0, length);
         }
     }
 
+    @SneakyThrows
     public static String write(String content) {
         String file = System.getProperty("user.dir") + "/" + System.currentTimeMillis() + ".txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(content);
-            return file;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(content);
+        return file;
     }
 
+    @SneakyThrows
     public static List<String> readLines(String filePath) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            lines.add(line);
         }
         return lines;
     }
